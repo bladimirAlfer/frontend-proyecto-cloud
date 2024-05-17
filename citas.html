@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Citas - Clínica</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .hidden { display: none; }
+    </style>
+</head>
+<body class="bg-gray-100 p-5">
+    <nav class="bg-gray-800 text-white p-4">
+        <a href="index.html" class="px-4 hover:underline">Inicio</a>
+        <a href="medicos.html" class="px-4 hover:underline">Médicos</a>
+        <a href="pacientes.html" class="px-4 hover:underline">Pacientes</a>
+    </nav>
+
+    <h1 class="text-3xl text-center font-bold my-6">Gestión de Citas</h1>
+
+    <div class="container mx-auto px-4">
+        <div class="mb-8">
+            <h2 class="text-2xl mb-3">Agregar Cita</h2>
+            <form id="add-cita-form" class="flex gap-4">
+                <select id="cita-medico" class="border p-1 flex-1">
+                    <option value="">Seleccione un médico</option>
+                </select>
+                <select id="cita-paciente" class="border p-1 flex-1">
+                    <option value="">Seleccione un paciente</option>
+                </select>
+                <input type="datetime-local" id="cita-date" class="border p-1 flex-1">
+                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Registrar</button>
+            </form>
+        </div>
+
+        <div>
+            <h2 class="text-2xl mb-3">Lista de Citas</h2>
+            <table id="citas-table" class="min-w-full table-auto">
+                <thead class="bg-gray-200">
+                    <tr>
+                        <th class="px-4 py-2">Fecha</th>
+                        <th class="px-4 py-2">Médico</th>
+                        <th class="px-4 py-2">Paciente</th>
+                        <th class="px-4 py-2">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="citas-list">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="edit-cita-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 overflow-y-auto h-full w-full px-4">
+        <div class="relative top-20 mx-auto shadow-lg rounded-md bg-white max-w-md">
+            <div class="py-4 text-left px-6">
+                <div class="flex justify-between items-center pb-3">
+                    <p class="text-2xl font-bold">Editar Cita</p>
+                    <div class="cursor-pointer z-50" onclick="closeModal()">
+                        <span>&times;</span>
+                    </div>
+                </div>
+                <form id="edit-cita-form">
+                    <input type="hidden" id="edit-cita-id">
+                    <select id="edit-cita-medico" class="border p-2 w-full mb-4">
+                        <option value="">Seleccione un médico</option>
+                    </select>
+                    <select id="edit-cita-paciente" class="border p-2 w-full mb-4">
+                        <option value="">Seleccione un paciente</option>
+                    </select>
+                    <input type="datetime-local" id="edit-cita-date" class="border p-2 w-full mb-4">
+                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Guardar Cambios</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script src="citas.js"></script>
+</body>
+</html>

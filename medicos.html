@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Médicos - Gestión de Clínica</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-5">
+    <nav class="bg-gray-800 text-white p-4">
+        <a href="index.html" class="px-4 hover:underline">Inicio</a>
+        <a href="pacientes.html" class="px-4 hover:underline">Pacientes</a>
+        <a href="citas.html" class="px-4 hover:underline">Citas</a>
+    </nav>
+
+    <h1 class="text-3xl text-center font-bold my-6">Gestión de Médicos</h1>
+
+    <div class="container mx-auto px-4">
+        <div class="mb-8">
+            <h2 class="text-2xl mb-3">Agregar Médico</h2>
+            <form id="add-medico-form" class="flex gap-4">
+                <input type="text" id="medico-name" placeholder="Nombre" class="border p-1 flex-1">
+                <select id="medico-specialty" class="border p-1">
+                    <option value="Gastroenterología">Gastroenterología</option>
+                    <option value="Endocrinología">Endocrinología</option>
+                    <option value="Oncología">Oncología</option>
+                    <option value="Pediatría">Pediatría</option>
+                    <option value="Psiquiatría">Psiquiatría</option>
+                    <option value="Ortopedia">Ortopedia</option>
+                    <option value="Oftalmología">Oftalmología</option>
+                    <option value="Ginecología">Ginecología</option>
+                    <option value="Urología">Urología</option>
+                    <option value="Otorrinolaringología">Otorrinolaringología</option>
+                    <option value="Neumología">Neumología</option>
+                    <option value="Infectología">Infectología</option>
+                    <option value="Reumatología">Reumatología</option>
+                    <option value="Nefrología">Nefrología</option>
+                    <option value="Hematología">Hematología</option>
+                    <option value="Anestesiología">Anestesiología</option>
+                    <option value="Geriatría">Geriatría</option>
+                    <option value="Medicina Interna">Medicina Interna</option>
+                    <option value="Medicina Familiar">Medicina Familiar</option>
+                    <option value="Radiología">Radiología</option>
+                    <option value="Medicina Deportiva">Medicina Deportiva</option>
+                    <option value="Cirugía General">Cirugía General</option>
+                    <option value="Cirugía Plástica">Cirugía Plástica</option>
+                    <option value="Cirugía Vascular">Cirugía Vascular</option>
+                    <option value="Neonatología">Neonatología</option>
+                    <option value="Oncología Pediátrica">Oncología Pediátrica</option>
+                    <option value="Genética Médica">Genética Médica</option>
+                    <option value="Médico Forense">Médico Forense</option>
+                    <option value="Medicina de Emergencia">Medicina de Emergencia</option>
+                    
+                </select>
+                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Registrar</button>
+            </form>
+        </div>
+
+        <div>
+            <h2 class="text-2xl mb-3">Lista de Médicos</h2>
+            <table id="medicos-table" class="min-w-full table-auto">
+                <thead class="bg-gray-200">
+                    <tr>
+                        <th class="px-4 py-2">Nombre</th>
+                        <th class="px-4 py-2">Especialidad</th>
+                        <th class="px-4 py-2">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="medicos-list">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="edit-medico-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 overflow-y-auto h-full w-full px-4">
+        <div class="relative top-20 mx-auto shadow-lg rounded-md bg-white max-w-md">
+            <div class="py-4 text-left px-6">
+                <div class="flex justify-between items-center pb-3">
+                    <p class="text-2xl font-bold">Editar Médico</p>
+                    <div class="cursor-pointer z-50" onclick="closeModal()">
+                        <span>&times;</span>
+                    </div>
+                </div>
+                <form id="edit-medico-form">
+                    <input type="hidden" id="edit-medico-id">
+                    <input type="text" id="edit-medico-name" placeholder="Nombre" class="border p-2 w-full mb-4">
+                    <select id="edit-medico-specialty" class="border p-2 w-full mb-4">
+                        <option value="Gastroenterología">Gastroenterología</option>
+                        <option value="Endocrinología">Endocrinología</option>
+                        <option value="Oncología">Oncología</option>
+                        <option value="Pediatría">Pediatría</option>
+                        <option value="Psiquiatría">Psiquiatría</option>
+                        <option value="Ortopedia">Ortopedia</option>
+                        <option value="Oftalmología">Oftalmología</option>
+                        <option value="Ginecología">Ginecología</option>
+                        <option value="Urología">Urología</option>
+                        <option value="Otorrinolaringología">Otorrinolaringología</option>
+                        <option value="Neumología">Neumología</option>
+                        <option value="Infectología">Infectología</option>
+                        <option value="Reumatología">Reumatología</option>
+                        <option value="Nefrología">Nefrología</option>
+                        <option value="Hematología">Hematología</option>
+                        <option value="Anestesiología">Anestesiología</option>
+                        <option value="Geriatría">Geriatría</option>
+                        <option value="Medicina Interna">Medicina Interna</option>
+                        <option value="Medicina Familiar">Medicina Familiar</option>
+                        <option value="Radiología">Radiología</option>
+                        <option value="Medicina Deportiva">Medicina Deportiva</option>
+                        <option value="Cirugía General">Cirugía General</option>
+                        <option value="Cirugía Plástica">Cirugía Plástica</option>
+                        <option value="Cirugía Vascular">Cirugía Vascular</option>
+                        <option value="Neonatología">Neonatología</option>
+                        <option value="Oncología Pediátrica">Oncología Pediátrica</option>
+                        <option value="Genética Médica">Genética Médica</option>
+                        <option value="Médico Forense">Médico Forense</option>
+                        <option value="Medicina de Emergencia">Medicina de Emergencia</option>
+                        
+                    </select>
+                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Guardar Cambios</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script src="medicos.js"></script>
+    </body>
+</html>
