@@ -8,7 +8,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 COPY . /usr/share/nginx/html
 
 # Exponer el puerto para Nginx
-EXPOSE 80
+EXPOSE 8080
 
 # Iniciar Nginx en primer plano
 CMD ["nginx", "-g", "daemon off;"]
